@@ -1,21 +1,19 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
-interface HudCardProps {
-  id: string;
+interface XRayCardProps {
   initialPosition: { x: number; y: number };
-  isActive: boolean;
-  onActivate: () => void;
-  children: React.ReactNode;
+  width?: string;
+  height?: string;
+  children?: React.ReactNode;
 }
 
-export default function HudCard({
-  id,
+export default function XRayCard({
   initialPosition,
-  isActive,
-  onActivate,
+  width = '400px',
+  height = '250px',
   children,
-}: HudCardProps) {
+}: XRayCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(initialPosition);
   const [isDragging, setIsDragging] = useState(false);
@@ -45,37 +43,44 @@ export default function HudCard({
     setIsDragging(true);
     const rect = cardRef.current.getBoundingClientRect();
     offset.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-
-    // 通知父層這張卡片被選中
-    onActivate();
   };
 
   return (
-    <div
+    <>
+      {/* 全螢幕背景 */}
+      <div className="fixed inset-0 -z-10">
+        <video
+          src="/chaewon-le-sserafim.jpg"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        />
+        {/* 如果要用圖片就換成： */}
+        {/* <img src="/images/bg.jpg" className="w-full h-full object-cover" /> */}
+      </div>
+
+      {/* 卡片玻璃窗 */}
+      <div
         ref={cardRef}
         onMouseDown={handleMouseDown}
         style={{
           position: 'absolute',
           top: position.y,
           left: position.x,
-          zIndex: isActive ? 999 : 1, // 選中時疊在最上
+          width,
+          height,
           cursor: isDragging ? 'grabbing' : 'grab',
-          transition: 'transform 0.15s ease, box-shadow 0.15s ease',
-          transform: isActive ? 'scale(1.02)' : 'scale(1)', // 選中時輕微放大
-          boxShadow: isActive
-            ? '0px 8px 20px rgba(0,0,0,0.6)'
-            : '0px 4px 10px rgba(0,0,0,0.3)',
-        }}    
-    >
-      <span className="text-gray-200 text-xs block mb-1">
-        y: {Math.round(position.y)} x: {Math.round(position.x)}
-      </span>
-      <div
-
-        className="rounded-xl border border-white/20 backdrop-blur-md bg-black/30 p-4"
+          borderRadius: '1rem',
+          border: '1px solid rgba(255,255,255,0.2)',
+          backdropFilter: 'blur(10px) saturate(140%)',
+          background: 'rgba(0, 0, 0, 0.3)',
+          boxShadow: '0px 8px 20px rgba(0,0,0,0.4)',
+        }}
       >
-        {children}
+        <div className="p-4 text-white">{children}</div>
       </div>
-    </div>
+    </>
   );
 }

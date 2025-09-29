@@ -1,11 +1,43 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
 import MouseLayout from '@/components/onMous'
 import HudBackground from "@/components/hudBackground";
 
+const PPSupplySans = localFont({
+  src: [
+    {
+      path: './Supply-free/PPSupplySans-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './Supply-free/PPSupplySans-Ultralight.otf',
+      weight: '200',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-supply-sans',
+})
+
+const PPSupplyMono = localFont({
+  src: [
+    {
+      path: './Supply-free/PPSupplyMono-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './Supply-free/PPSupplyMono-Ultralight.otf',
+      weight: '200',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-supply-mono',
+})
+
 export const metadata: Metadata = {
-  title: "",
+  title: "Modern Website Design ",
   description: "",
 };
 
@@ -18,6 +50,7 @@ export default function RootLayout({
     <html lang="en">
       <body
       suppressHydrationWarning
+      className={`${PPSupplySans.variable} ${PPSupplyMono.variable}`}
       >
         <MouseLayout>
           <HudBackground/>

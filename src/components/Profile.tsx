@@ -11,7 +11,7 @@ export default function Profile({ onOpenSkill }: ProfileProps) {
   const TagRef = React.useRef<HTMLSpanElement>(null);
 
   return (
-    <div className="border border-white w-full p-4 bg-[#1c1b1bff] grid gap-4">
+    <div className=" w-full p-4  grid gap-4">
       <div className="flex flex-col sm:flex-row gap-4">
         {/* 左邊頭像 */}
         <div className="relative group flex-shrink-0">
@@ -29,14 +29,14 @@ export default function Profile({ onOpenSkill }: ProfileProps) {
 
         {/* 右邊文字 */}
         <div className="flex flex-col justify-center text-center sm:text-left space-y-1">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-wide">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl text-white tracking-wide">
             DaoHui
           </h1>
           <span
             ref={TagRef}
             onMouseEnter={() => setHovertype(true)}
             onMouseLeave={() => setHovertype(false)}
-            className="text-[#b891f5] font-bold cursor-pointer select-none transition-colors duration-300 text-sm sm:text-base mt-1"
+            className="text-[#b891f5] cursor-pointer select-none transition-colors duration-300 text-sm sm:text-base mt-1"
           >
             {hovertype ? 'i love chaewon 💜' : '@daohuirealm'}
           </span>

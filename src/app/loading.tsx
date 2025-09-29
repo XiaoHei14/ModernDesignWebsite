@@ -3,91 +3,94 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export default function Loading() {
-    const boxRef = useRef<HTMLDivElement>(null);
-    const headerRef = useRef<HTMLDivElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
-    const progressRef = useRef<HTMLDivElement>(null);
+    const cornersRef = useRef<HTMLDivElement[]>([]);
+
+    const setCornerRef = (el: HTMLDivElement) => {
+        if (el && !cornersRef.current.includes(el)) {
+            cornersRef.current.push(el);
+        }
+    };
 
     useEffect(() => {
         const tl = gsap.timeline();
 
-        // Step 1: 中心點 → 水平線
-        tl.to(boxRef.current, {
-            width: 120,
-            height: 4,
-            duration: 0.5,
-            ease: "power2.out",
-            transformOrigin: "center center",
+        cornersRef.current.forEach((corner) => {
+            const rect = corner.getBoundingClientRect();
+            const centerX = window.innerWidth / 2 - rect.width / 2;
+            const centerY = window.innerHeight / 2 - rect.height / 2;
+
+            // 先移到中央並縮小到 0
+            gsap.set(corner, {
+                x: centerX - rect.left,
+                y: centerY - rect.top,
+                scale: 0,
+                opacity: 0
+            });
         });
 
-        // Step 2: 線 → 視窗框
-        tl.to(boxRef.current, {
-            width: "50%",
-            height: "50%",
-            borderRadius: 0,
-            duration: 0.6,
-            ease: "power3.out",
-        });
-
-        // Step 3: Header & Content 淡入
+        // 從中央放大並移動到角落
         tl.to(
-            [headerRef.current, contentRef.current],
-            { opacity: 1, duration: 0.4, stagger: 0.1, ease: "power1.out" },
-            "-=0.2"
-        );
-
-        // Step 4: 進度條動畫
-        if (progressRef.current) {
-            const progressBar = progressRef.current.querySelector<HTMLDivElement>("div");
-            if (progressBar) {
-                gsap.to(progressBar, {
-                    width: "100%",
-                    duration: 2,
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "power1.inOut",
-                });
+            cornersRef.current,
+            {
+                x: 0,
+                y: 0,
+                scale: 1,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power1.in"
             }
-        }
+        );
     }, []);
 
     return (
-        <main className="flex items-center justify-center min-h-screen relative ">
-            {/* 視窗框 */}
-            <div
-                ref={boxRef}
-                className="border rounded-md flex flex-col overflow-hidden relative"
-                style={{ width: 0, height: 0 }}
-            >
-                {/* Header */}
+        <main className="flex items-center justify-center min-h-screen relative bg-[#171717]">
+            {/* 網格背景 */}
+            <div className="absolute inset-0 z-10">
                 <div
-                    ref={headerRef}
-                    className="border-b  text-white w-full flex justify-between items-center px-4 py-2 opacity-0"
-                >
-                    <span className="font-semibold tracking-wide">Loading</span>
-                    <div className="flex gap-2">
-                        <button className="w-5 h-5 flex items-center justify-center border border-white text-xs leading-none hover:bg-white hover:text-black transition">
-                            口
-                        </button>
-                        <button className="w-5 h-5 flex items-center justify-center border border-white text-xs leading-none hover:bg-white hover:text-black transition">
-                            X
-                        </button>
-                    </div>
-                </div>
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                        backgroundImage: `
+                        linear-gradient(#e9d4ff28 1px, transparent 1px),
+                        linear-gradient(90deg, #e9d4ff28 1px, transparent 1px)
+                        `,
+                        backgroundSize: "50px 50px",
+                    }}
+                />
+                <div
+                    className="absolute inset-0 opacity-10"
+                    style={{
+                        backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+                        backgroundSize: "30px 30px",
+                    }}
+                />
+            </div>
 
-                {/* Content */}
-                <div
-                    ref={contentRef}
-                    className="flex-1 flex items-center justify-center p-4 opacity-0"
-                >
-                    {/* 進度條 */}
-                    <div
-                        ref={progressRef}
-                        className="relative w-100 h-1 bg-gray-200 rounded overflow-hidden"
-                    >
-                        <div className="absolute left-0 top-0 h-full w-0 bg-gray-400"></div>
-                    </div>
-                </div>
+            {/* 四個角落框 */}
+            {/** 左上 */}
+            <div ref={setCornerRef} className="absolute top-12 left-12 w-8 h-8 origin-center">
+                <div className="absolute top-0 left-0 w-4 h-0.5 bg-white"></div>
+                <div className="absolute top-0 left-0 w-0.5 h-4 bg-white"></div>
+            </div>
+            {/** 右上 */}
+            <div ref={setCornerRef} className="absolute top-12 right-12 w-8 h-8 origin-center">
+                <div className="absolute top-0 right-0 w-4 h-0.5 bg-white"></div>
+                <div className="absolute top-0 right-0 w-0.5 h-4 bg-white"></div>
+            </div>
+            {/** 左下 */}
+            <div ref={setCornerRef} className="absolute bottom-12 left-12 w-8 h-8 origin-center">
+                <div className="absolute bottom-0 left-0 w-4 h-0.5 bg-white"></div>
+                <div className="absolute bottom-0 left-0 w-0.5 h-4 bg-white"></div>
+            </div>
+            {/** 右下 */}
+            <div ref={setCornerRef} className="absolute bottom-12 right-12 w-8 h-8 origin-center">
+                <div className="absolute bottom-0 right-0 w-4 h-0.5 bg-white"></div>
+                <div className="absolute bottom-0 right-0 w-0.5 h-4 bg-white"></div>
+            </div>
+
+            {/* 命令 */}
+            <div>
+                <span></span>
             </div>
         </main>
     );

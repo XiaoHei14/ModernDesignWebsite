@@ -7,7 +7,7 @@ interface SkillCardProps {
 
 export default function SkillCard({ onClose }: SkillCardProps) {
   return (
-    <div className="border border-white w-80 p-4 bg-[#1c1b1bff] rounded-lg shadow-lg">
+    <div className="w-80 p-4  rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-2">
         <h2 className="text-white font-bold text-lg">Skills</h2>
         <button

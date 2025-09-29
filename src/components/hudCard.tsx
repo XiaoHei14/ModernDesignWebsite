@@ -68,7 +68,7 @@ export default function HudCard({
         }}    
     >
       <span className="text-gray-200 text-xs block mb-1">
-        y: {Math.round(position.y)} x: {Math.round(position.x)}
+        Y: {Math.round(position.y)} X: {Math.round(position.x)}
       </span>
       <div
 

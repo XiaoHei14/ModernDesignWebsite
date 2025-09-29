@@ -6,6 +6,7 @@ import SkillCard from '@/components/SkillCard';
 import Headers from '@/components/Header';
 import { usePathname } from 'next/navigation';
 import XRayCard from '@/components/XRayCard';
+import FullBackground from '@/components/FullBackground';
 
 export default function Home() {
   const Path = usePathname();
@@ -21,6 +22,7 @@ export default function Home() {
 
   return (
     <main className="relative w-screen h-screen overflow-hidden">
+      
       <Headers />
 
       {isDesktop && (
@@ -46,6 +48,15 @@ export default function Home() {
         </HudCard>
       )}
 
+
+
+      {/* HUD 卡片 */}
+     <XRayCard
+        width={400}
+        height={250}
+        initialPosition={{ x: 100, y: 100 }}
+        backgroundImage="/chaewon-le-sserafim.jpg"
+      />
     </main>
   );
 }

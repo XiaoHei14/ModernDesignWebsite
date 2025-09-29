@@ -49,15 +49,15 @@ export default function Header({ className = 'flex z-30' }: HeaderProps) {
         top: pos.y,
         userSelect: 'none',
       }}
-      className={`${className} h-10`} // ✅ 高度變高
+      className={`${className} h-10 font-[PPSupplyMono]`} // ✅ 高度變高
     >
       {/* 拖曳點 */}
       <div
         onMouseDown={onMouseDown}
-        style={{ cursor: dragging ? 'grabbing' : 'grab' }}
-        className="menu-drag menu-blur group relative w-8 max-xl:hidden pointer-events-auto flex items-center"
+        style={{ cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none' }}
+        className="menu-drag menu-blur group relative w-8 max-xl:hidden pointer-events-auto flex items-center justify-center bg-black/30 backdrop-blur-md shadow-lg rounded-md mr-5"
       >
-        <div className="absolute-center svg-wrapper w-4 text-white opacity-20 xl:group-hover:opacity-100 transition-opacity duration-200 ease-out">
+        <div className="svg-wrapper w-4 text-white opacity-20 xl:group-hover:opacity-100 transition-opacity duration-200 ease-out">
           <svg width="10" height="24" viewBox="0 0 10 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="6" width="4" height="4" rx="1" fill="currentColor" />
             <rect x="6" y="10" width="4" height="4" rx="1" fill="currentColor" />
@@ -69,9 +69,10 @@ export default function Header({ className = 'flex z-30' }: HeaderProps) {
         </div>
       </div>
 
+
       {/* Header 內容 */}
       <div className="h-full px-4 rounded-md flex items-center bg-black/30 backdrop-blur-md shadow-md">
-        <span className="text-white text-sm font-mono">C: {pageName}</span>
+        <span className="text-white text-sm ">C: {pageName}</span>
       </div>
     </div>
   );

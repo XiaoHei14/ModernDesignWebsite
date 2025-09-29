@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import "./globals.css";
 import MouseLayout from '@/components/onMous'
 import HudBackground from "@/components/hudBackground";
+import FullBackground from "@/components/FullBackground";
 
 const PPSupplySans = localFont({
   src: [
@@ -50,7 +51,7 @@ export default function RootLayout({
     <html lang="en">
       <body
       suppressHydrationWarning
-      className={`${PPSupplySans.variable} ${PPSupplyMono.variable}`}
+      className={`font-[PPSupplyMono]`}
       >
         <MouseLayout>
           <HudBackground/>

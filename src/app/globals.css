@@ -11,3 +11,15 @@ body {
   background: var(--foreground);
   color: var(--background);
 }
+
+/* 隱藏 Chrome/Edge/Safari 滾動條 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* 隱藏 Firefox 滾動條 */
+* {
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+}

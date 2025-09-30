@@ -10,6 +10,7 @@ interface XRayCardProps {
   className?: string;
 }
 
+
 export default function XRayCard({
   width = 300,
   height = 200,
@@ -35,6 +36,7 @@ export default function XRayCard({
     setIsDragging(true);
     const rect = cardRef.current.getBoundingClientRect();
     offset.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+
   };
 
   useEffect(() => {
@@ -68,6 +70,7 @@ export default function XRayCard({
 
   const { dx, dy } = getBgOffset();
 
+
   return (
     <div
       ref={cardRef}
@@ -89,7 +92,7 @@ export default function XRayCard({
     >
       {/* 背景只在卡片內顯示 */}
       <div
-        className="w-full h-full"
+        className="w-full h-full "
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: `${isClient ? window.innerWidth : 1920}px ${

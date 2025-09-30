@@ -4,6 +4,7 @@ import "./globals.css";
 import MouseLayout from '@/components/onMous'
 import HudBackground from "@/components/hudBackground";
 import FullBackground from "@/components/FullBackground";
+import Headers from '@/components/Header'
 
 const PPSupplySans = localFont({
   src: [
@@ -54,6 +55,7 @@ export default function RootLayout({
       className={`font-[PPSupplyMono]`}
       >
         <MouseLayout>
+          <Headers />
           <HudBackground/>
           {children}
         </MouseLayout>

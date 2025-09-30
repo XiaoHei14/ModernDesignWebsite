@@ -1,0 +1,56 @@
+'use client';
+import React, { useState, useEffect } from 'react';
+import HudCard from '@/components/hudCard';
+import Profile from '@/components/Profile';
+import SkillCard from '@/components/SkillCard';
+import XRayCard from '@/components/XRayCard';
+
+export default function HeroPage() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [showSkillCard, setShowSkillCard] = useState(false);
+  
+
+  // 🔑 集中管理哪張卡片在最上層
+  const [activeCard, setActiveCard] = useState<string | null>(null);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 640);
+  }, []);
+
+  return (
+    <main className="relative h-screen overflow-hidden">
+      
+
+      {isDesktop && (
+        <HudCard
+          initialPosition={{ x: 400, y: 100 }}
+          isActive={activeCard === 'profile'}
+          onActivate={() => setActiveCard('profile')}
+        >
+          <Profile onOpenSkill={() => setShowSkillCard(true)} />
+        </HudCard>
+      )}
+
+      {/* SkillCard 彈出在頁面上 */}
+      {showSkillCard && isDesktop && (
+        <HudCard
+          initialPosition={{ x: 1000, y: 40 }}
+          isActive={activeCard === 'skill'}
+          onActivate={() => setActiveCard('skill')}
+        >
+          <SkillCard onClose={() => setShowSkillCard(false)} />
+        </HudCard>
+      )}
+
+      
+    {/* HUD 卡片 */}
+    <XRayCard
+    width={400}
+    height={300}
+    initialPosition={{ x: 100, y: 100 }}
+    backgroundImage="/chaewon-le-sserafim.jpg"
+    />
+
+    </main>
+  );
+}

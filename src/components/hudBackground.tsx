@@ -96,7 +96,7 @@ export default function HudBackground() {
       {/* 系統資訊 */}
       {isClient && (
         <motion.div className="absolute bottom-14 left-11 px-11 py-3 rounded-lg">
-          <div className="text-xs text-gray-400/80 font-mono space-y-1 select-none">
+          <div className="text-xs text-gray-400/80  space-y-1 select-none">
             <div>DATE: {date}</div>
             <div>TIME: {time}</div>
             <div>DISPLAY: {display}</div>

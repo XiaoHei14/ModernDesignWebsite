@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function NotFound() {
   return (
-    <main className="z-50 w-full h-screen flex items-center justify-center bg-black">
+    <main className="z-70 w-full h-screen flex items-center justify-center bg-black">
       <div className="border rounded-md flex flex-col overflow-hidden relative w-80 md:w-96 h-48 backdrop-blur-sm">
         {/* Header */}
         <motion.div

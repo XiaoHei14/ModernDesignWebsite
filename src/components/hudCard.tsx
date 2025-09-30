@@ -56,7 +56,7 @@ export default function HudCard({
           position: 'absolute',
           top: position.y,
           left: position.x,
-          zIndex: isActive ? 999 : 1, // 選中時疊在最上
+          zIndex: isActive ? 40 : 1, // 選中時疊在最上
           cursor: isDragging ? 'grabbing' : 'grab',
           transition: 'transform 0.15s ease, box-shadow 0.15s ease',
           transform: isActive ? 'scale(1.02)' : 'scale(1)', // 選中時輕微放大

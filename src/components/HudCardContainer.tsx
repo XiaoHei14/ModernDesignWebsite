@@ -8,7 +8,6 @@ export default function HudCardContainer() {
   return (
     <>
       <HudCard
-        id="card1"
         isActive={activeId === 'card1'}
         onActivate={() => setActiveId('card1')}
         initialPosition={{ x: 100, y: 100 }}
@@ -17,7 +16,6 @@ export default function HudCardContainer() {
       </HudCard>
 
       <HudCard
-        id="card2"
         isActive={activeId === 'card2'}
         onActivate={() => setActiveId('card2')}
         initialPosition={{ x: 300, y: 150 }}

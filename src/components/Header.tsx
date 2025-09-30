@@ -1,6 +1,6 @@
 'use client';
 import { usePathname } from 'next/navigation';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 interface HeaderProps {
   className?: string;
@@ -20,13 +20,13 @@ export default function Header({ className = 'flex z-30' }: HeaderProps) {
     }
   };
 
-  const onMouseMove = (e: MouseEvent) => {
+  const onMouseMove = useCallback((e: MouseEvent) => {
     if (dragging) {
       setPos({ x: e.clientX - offset.x, y: e.clientY - offset.y });
     }
-  };
+  }, [dragging, offset]);
 
-  const onMouseUp = () => setDragging(false);
+  const onMouseUp = useCallback(() => setDragging(false), []);
 
   useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);
@@ -35,9 +35,9 @@ export default function Header({ className = 'flex z-30' }: HeaderProps) {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseup', onMouseUp);
     };
-  }, [dragging, offset]);
+  }, [onMouseMove, onMouseUp]);
 
-  let pathname = usePathname();
+  const pathname = usePathname();
   const pageName = pathname === '/' ? '/Home' : pathname;
 
   return (

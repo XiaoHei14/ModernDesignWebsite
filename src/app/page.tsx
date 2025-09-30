@@ -4,12 +4,9 @@ import HudCard from '@/components/hudCard';
 import Profile from '@/components/Profile';
 import SkillCard from '@/components/SkillCard';
 import Headers from '@/components/Header';
-import { usePathname } from 'next/navigation';
 import XRayCard from '@/components/XRayCard';
-import FullBackground from '@/components/FullBackground';
 
 export default function Home() {
-  const Path = usePathname();
   const [isDesktop, setIsDesktop] = useState(false);
   const [showSkillCard, setShowSkillCard] = useState(false);
 
@@ -27,7 +24,6 @@ export default function Home() {
 
       {isDesktop && (
         <HudCard
-          id="profile"
           initialPosition={{ x: 400, y: 100 }}
           isActive={activeCard === 'profile'}
           onActivate={() => setActiveCard('profile')}
@@ -39,7 +35,6 @@ export default function Home() {
       {/* SkillCard 彈出在頁面上 */}
       {showSkillCard && isDesktop && (
         <HudCard
-          id="skill"
           initialPosition={{ x: 1000, y: 40 }}
           isActive={activeCard === 'skill'}
           onActivate={() => setActiveCard('skill')}

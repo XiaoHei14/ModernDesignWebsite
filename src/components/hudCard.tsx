@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 interface HudCardProps {
-  id: string;
   initialPosition: { x: number; y: number };
   isActive: boolean;
   onActivate: () => void;
@@ -10,7 +9,6 @@ interface HudCardProps {
 }
 
 export default function HudCard({
-  id,
   initialPosition,
   isActive,
   onActivate,

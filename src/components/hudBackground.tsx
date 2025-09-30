@@ -2,17 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-interface HudBox {
-  id: number;
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-  type: 'scan' | 'data' | 'warning' | 'status';
-}
-
 export default function HudBackground() {
-  const [boxes, setBoxes] = useState<HudBox[]>([]);
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [display, setDisplay] = useState('');
